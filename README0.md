@@ -15,5 +15,5 @@
 ## (3)タスク定義作成
 ※詳細な手順は[ecs/README.md]を参照して下さい
 
-## (4)TerraformでAWSの実行環境をさk末井
+## (4)TerraformでAWSの実行環境を作成
 ※詳細な手順は[terraform/README.md]を参照して下さい
