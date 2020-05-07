@@ -1,0 +1,53 @@
+## タスク定義修正
+
+task_definition.jsonを修正
+
+```
+{
+    "family": "sample",
+    "executionRoleArn": "arn:aws:iam::自分の環境に変更:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "containerDefinitions": [
+        {
+            "name": "knowledge",
+            "image": "自分のECRのリポジトリ/knowledge:latest",
+            "ulimits": [
+                {
+                    "name": "nofile",
+                    "softLimit": 65536,
+                    "hardLimit": 65536
+                }
+            ],
+            "portMappings": [
+                {
+                    "protocol": "tcp",
+                    "containerPort": 8080
+                }
+            ],
+            "memoryReservation": 256,
+            "essential": true,
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/knowledge",
+                    "awslogs-region": "ap-northeast-1",
+                    "awslogs-stream-prefix": "knowledge"
+                }
+            }
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "2048"
+}
+```
+
+## タスク定義登録
+以下でエラーが発生しなければOK
+
+```
+$ chmod 755 taskexec.sh
+$ sh ./taskexec.sh
+```

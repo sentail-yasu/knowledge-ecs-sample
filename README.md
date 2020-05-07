@@ -1,1 +1,0 @@
-# knowledge-ecs-sample
